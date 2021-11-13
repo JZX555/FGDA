@@ -20,6 +20,8 @@ class HyperParam:
             self.debug()
         elif mode == 'base':
             self.base()
+        elif mode == 'subdomain-i':
+            self.subdomain_i()
         else:
             raise NameError("choose the right mode.")
 
@@ -90,3 +92,12 @@ class HyperParam:
         self.train_data = ['/data_path/cws_joint_pos.train']
         self.dev_data = '/data_path/cws_joint_pos.dev'
         self.test_data = '/data_path/cws_joint_pos.test'
+
+    def subdomain_i(self, trainsets_len='the value of i + 1 or the lengths of train_data'):
+        self.base()
+        self.trainsets_len = trainsets_len
+        self.train_data = [
+            '/data_path/subdomain_i.train', '/data_path/subdomain_(i-1).train', '...',
+            '/data_path/subdomain_1.train', '/data_path/cws_joint_pos.train'
+        ]
+        self.ZX_corpus = 'the remaining data after obtaining subdomain_i.train by use the method vocab.apply_vocab() in prepocessing.py'
